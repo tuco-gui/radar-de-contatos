@@ -9,15 +9,17 @@
 - [x] Documentar as integrações identificadas e a configuração local de credenciais.
 - [ ] Revogar e substituir o token antigo no provedor da API.
 
-## Fase 1 — Executar o protótipo no macOS
+## Fase 1 — Primeiro teste local
 
-- [ ] Confirmar versão do PHP e extensões necessárias.
-- [ ] Instalar dependências com Composer.
+- [ ] Confirmar PHP, Composer e PDO SQLite no macOS.
+- [ ] Documentar e validar instalação no Windows.
 - [ ] Configurar bot e banco em ambiente local.
-- [ ] Testar somente com dados fictícios e CPFs de teste autorizados.
-- [ ] Registrar erros sem expor respostas completas de APIs.
+- [ ] Inserir um registro de teste autorizado, sem publicá-lo.
+- [ ] Executar uma busca real por nome, data de nascimento, filiação e cidade.
+- [ ] Corrigir erros de execução e registrar resultados sem expor dados.
+- [ ] Criar testes automatizados para homônimos, normalização e entradas inválidas.
 
-## Fase 2A — Fundação de busca local
+## Fase 2 — Fundação de busca local
 
 - [x] Criar tabela `person_records` com fonte, referência e finalidade.
 - [x] Implementar busca por nome, cidade, estado, nascimento e filiação.
@@ -25,17 +27,18 @@
 - [x] Mascarar nomes de mãe e pai na resposta do Telegram.
 - [x] Documentar o comando e as limitações da busca.
 - [ ] Criar entrada administrativa autenticada para registros autorizados.
-- [ ] Adicionar testes automatizados para homônimos, normalização e entradas inválidas.
 - [ ] Criar auditoria de consultas e retenção.
 
-## Fase 2B — Separar o motor de consultas
+## Fase 3 — Desvincular o motor do Telegram
 
-- [ ] Extrair consultas para serviços independentes do Telegram.
-- [ ] Criar um contrato comum de resultado: tipo, valor mascarado, fonte, data, evidência e confiança.
-- [ ] Criar validação de CPF e CNPJ sem afirmar identidade por coincidência.
-- [ ] Adicionar adaptadores de provedores sem acoplar a aplicação a um único fornecedor.
+- [ ] Extrair a busca para um serviço independente do Telegram.
+- [ ] Criar contrato comum de resultado: tipo, valor mascarado, fonte, data, evidência e confiança.
+- [ ] Criar uma API HTTP local.
+- [ ] Criar uma interface web HTML simples para o primeiro teste.
+- [ ] Permitir importar um registro autorizado pela interface, sem colocar dados no repositório.
+- [ ] Manter o Telegram como canal opcional durante a transição.
 
-## Fase 3 — Fontes legítimas
+## Fase 4 — Fontes legítimas
 
 - [ ] Integrar dados abertos de CNPJ.
 - [ ] Avaliar provedor oficial/licenciado para CPF.
@@ -44,16 +47,16 @@
 - [ ] Registrar contrato, finalidade, origem e data de cada fonte.
 - [ ] Não integrar bases vazadas, scraping de áreas privadas ou fontes sem procedência.
 
-## Fase 4 — Produto
+## Fase 5 — Produto
 
-- [ ] Criar API HTTP.
-- [ ] Criar painel web autenticado.
+- [ ] Painel web autenticado.
 - [ ] Multiempresa e permissões.
 - [ ] Histórico de consultas e tentativas de contato.
 - [ ] Exportação controlada e mascaramento de dados.
 - [ ] Canal para correção, acesso e exclusão de dados.
+- [ ] Empacotamento opcional para macOS e Windows.
 
-## Fase 5 — Produção
+## Fase 6 — Produção
 
 - [ ] Revisão jurídica e de privacidade.
 - [ ] DPIA/registro de tratamento quando aplicável.
