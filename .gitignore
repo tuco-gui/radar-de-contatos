@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+/vendor/
+/data/
+/*.sqlite
+*.sqlite
+*.db
+.DS_Store
+._*
+.idea/
+.vscode/
