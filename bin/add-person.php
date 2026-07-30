@@ -11,9 +11,11 @@ $pdo = new PDO('sqlite:' . $database);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$ask = static function (string $label, bool $required = false): string {
+$ask = static function (string $label, bool $required = false, string $default = ''): string {
     do {
-        $value = trim((string) readline($label . ($required ? ' (obrigatório)' : '') . ': '));
+        $suffix = $required ? ' (obrigatório)' : ($default !== '' ? " [$default]" : '');
+        $value = trim((string) readline($label . $suffix . ': '));
+        if ($value === '' && $default !== '') return $default;
         if (!$required || $value !== '') return $value;
         fwrite(STDERR, "Esse campo é obrigatório." . PHP_EOL);
     } while (true);
@@ -32,9 +34,9 @@ $record = [
     'city' => $ask('Cidade'),
     'state' => $ask('Estado'),
     'profession' => $ask('Profissão'),
-    'source' => $ask('Fonte', true),
+    'source' => $ask('Fonte', false, 'informado pelo usuário autorizado'),
     'source_reference' => $ask('Referência da fonte'),
-    'purpose' => $ask('Finalidade autorizada', true),
+    'purpose' => $ask('Finalidade autorizada', false, 'teste local autorizado'),
 ];
 
 $stmt = $pdo->prepare(
