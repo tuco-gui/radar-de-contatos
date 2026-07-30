@@ -1,6 +1,6 @@
 <?php
 
-use Symfony\\Component\\Dotenv\\Dotenv;
+use Symfony\Component\Dotenv\Dotenv;
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
@@ -26,9 +26,12 @@ $record = [
     'full_name' => $ask('Nome completo', true),
     'birth_date' => $ask('Data de nascimento (AAAA-MM-DD)'),
     'mother_name' => $ask('Nome da mãe'),
+    'mother_birth_date' => $ask('Data de nascimento da mãe (AAAA-MM-DD)'),
     'father_name' => $ask('Nome do pai'),
+    'father_birth_date' => $ask('Data de nascimento do pai (AAAA-MM-DD)'),
     'city' => $ask('Cidade'),
     'state' => $ask('Estado'),
+    'profession' => $ask('Profissão'),
     'source' => $ask('Fonte', true),
     'source_reference' => $ask('Referência da fonte'),
     'purpose' => $ask('Finalidade autorizada', true),
@@ -36,8 +39,10 @@ $record = [
 
 $stmt = $pdo->prepare(
     'INSERT INTO person_records
-     (full_name, birth_date, mother_name, father_name, city, state, source, source_reference, purpose)
-     VALUES (:full_name, :birth_date, :mother_name, :father_name, :city, :state, :source, :source_reference, :purpose)'
+     (full_name, birth_date, mother_name, mother_birth_date, father_name, father_birth_date,
+      city, state, profession, source, source_reference, purpose)
+     VALUES (:full_name, :birth_date, :mother_name, :mother_birth_date, :father_name, :father_birth_date,
+      :city, :state, :profession, :source, :source_reference, :purpose)'
 );
 $stmt->execute($record);
 
