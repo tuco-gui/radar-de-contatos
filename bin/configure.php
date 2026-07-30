@@ -14,4 +14,18 @@ $stmt = Db::get(0)->prepare($sql);
 if (!$stmt->execute()) {
 	die("Não foi possível configurar seu banco de dados." . PHP_EOL);
 }
+
+$pdo = Db::get(0);
+$columns = array_column($pdo->query('PRAGMA table_info(person_records)')->fetchAll(), 'name');
+$migrations = [
+    'mother_birth_date' => 'ALTER TABLE person_records ADD COLUMN mother_birth_date TEXT',
+    'father_birth_date' => 'ALTER TABLE person_records ADD COLUMN father_birth_date TEXT',
+    'profession' => 'ALTER TABLE person_records ADD COLUMN profession TEXT',
+];
+foreach ($migrations as $column => $migration) {
+    if (!in_array($column, $columns, true)) {
+        $pdo->exec($migration);
+    }
+}
+
 die("Banco de dados configurado com sucesso." . PHP_EOL);
