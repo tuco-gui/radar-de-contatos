@@ -1,0 +1,28 @@
+{
+    "name": "fernandothedev/base-bot-telegram-php",
+    "description": "Base para bot para o Telegram usando a Biblioteca Zanzara",
+    "autoload": {
+        "psr-4": {
+            "Fernandothedev\\BaseBotTelegramPhp\\": "src/"
+        }
+    },
+    "authors": [{
+        "name": "fernando",
+        "email": "fernandolovephp@gmail.com"
+    }],
+    "scripts": {
+        "bot": "php bin/bootstrap.php"
+    },
+    "require": {
+        "badfarm/zanzara": "^0.9.1",
+        "nyholm/psr7": "^1.8",
+        "symfony/dotenv": "^7.0",
+        "fernandothedev/setup-php": "dev-main",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
