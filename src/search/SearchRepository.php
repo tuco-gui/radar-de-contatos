@@ -15,7 +15,15 @@ final class SearchRepository
 
         $where = [];
         $params = [];
-        foreach (['name' => 'full_name', 'city' => 'city', 'state' => 'state', 'birth_date' => 'birth_date'] as $key => $column) {
+        foreach ([
+            'name' => 'full_name',
+            'city' => 'city',
+            'state' => 'state',
+            'birth_date' => 'birth_date',
+            'profession' => 'profession',
+            'mother_birth_date' => 'mother_birth_date',
+            'father_birth_date' => 'father_birth_date',
+        ] as $key => $column) {
             if (($criteria[$key] ?? '') !== '') {
                 $where[] = "LOWER($column) LIKE LOWER(:$key)";
                 $params[$key] = '%' . $criteria[$key] . '%';
@@ -28,7 +36,9 @@ final class SearchRepository
             }
         }
 
-        $sql = 'SELECT id, full_name, birth_date, mother_name, father_name, city, state, source, source_reference
+        $sql = 'SELECT id, full_name, birth_date, mother_name, mother_birth_date,
+                       father_name, father_birth_date, city, state, profession,
+                       source, source_reference
                 FROM person_records WHERE ' . implode(' AND ', $where) . ' ORDER BY full_name LIMIT :limit';
         $stmt = $this->db->prepare($sql);
         foreach ($params as $key => $value) $stmt->bindValue(':' . $key, $value, PDO::PARAM_STR);
@@ -54,9 +64,19 @@ final class SearchRepository
     private function score(array $row, array $criteria): int
     {
         $score = 0;
-        foreach (['name' => 'full_name', 'city' => 'city', 'state' => 'state', 'birth_date' => 'birth_date', 'mother_name' => 'mother_name', 'father_name' => 'father_name'] as $key => $column) {
+        foreach ([
+            'name' => 'full_name',
+            'city' => 'city',
+            'state' => 'state',
+            'birth_date' => 'birth_date',
+            'profession' => 'profession',
+            'mother_name' => 'mother_name',
+            'mother_birth_date' => 'mother_birth_date',
+            'father_name' => 'father_name',
+            'father_birth_date' => 'father_birth_date',
+        ] as $key => $column) {
             if (($criteria[$key] ?? '') !== '' && mb_strtolower((string) $row[$column]) === mb_strtolower($criteria[$key])) {
-                $score += $key === 'name' ? 35 : 13;
+                $score += $key === 'name' ? 35 : 8;
             }
         }
         return min($score, 100);
