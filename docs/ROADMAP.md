@@ -5,24 +5,27 @@
 - [x] Publicar a estrutura inicial do protótipo.
 - [x] Remover credenciais do código publicado.
 - [x] Remover dados pessoais do seed do banco.
-- [x] Criar `.env.example`, `.gitignore` e documentação inicial.
+- [x] Criar \`.env.example\`, \`.gitignore\` e documentação inicial.
 - [x] Documentar as integrações identificadas e a configuração local de credenciais.
 - [ ] Revogar e substituir o token antigo no provedor da API.
 
 ## Fase 1 — Primeiro teste local
 
 - [ ] Confirmar PHP, Composer e PDO SQLite no macOS.
-- [ ] Documentar e validar instalação no Windows.
+- [x] Adotar instalação com \`composer install --no-plugins\` para compatibilidade com Composer 2.10.
+- [x] Documentar instalação no Windows.
 - [ ] Configurar bot e banco em ambiente local.
 - [x] Criar script local para inserir um registro autorizado, sem publicá-lo.
-- [ ] Executar uma busca real por nome, data de nascimento, filiação e cidade.
-- [ ] Corrigir erros de execução e registrar resultados sem expor dados.
+- [ ] Executar uma busca real por nome, data de nascimento, filiação, cidade e profissão.
+- [x] Corrigir erro de sintaxe encontrado no script de cadastro e no comando de busca.
+- [ ] Registrar resultados sem expor dados.
 - [ ] Criar testes automatizados para homônimos, normalização e entradas inválidas.
 
 ## Fase 2 — Fundação de busca local
 
-- [x] Criar tabela `person_records` com fonte, referência e finalidade.
+- [x] Criar tabela \`person_records\` com fonte, referência e finalidade.
 - [x] Implementar busca por nome, cidade, estado, nascimento e filiação.
+- [x] Adicionar profissão e datas de nascimento dos pais como critérios opcionais.
 - [x] Criar pontuação indicativa de compatibilidade.
 - [x] Mascarar nomes de mãe e pai na resposta do Telegram.
 - [x] Documentar o comando e as limitações da busca.
