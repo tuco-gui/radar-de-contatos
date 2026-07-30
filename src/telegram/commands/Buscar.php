@@ -18,7 +18,7 @@ final class Buscar implements CommandInterface
     {
         $criteria = $this->parseCriteria($arg ?? '');
         if (!$criteria) {
-            $this->ctx->reply("*Busca local por nome*\n\nUse: /buscar nome="Ana Souza" cidade=Botucatu\nOpcional: estado=SP nascimento=1980-01-01 mae="Maria Souza" pai="Joao Souza"");
+            $this->ctx->reply("*Busca local por nome*\n\nUse: /buscar nome=\\\"Ana Souza\\\" cidade=Botucatu\nOpcional: estado=SP nascimento=1980-01-01 mae=\\\"Maria Souza\\\" pai=\\\"Joao Souza\\\"");
             return;
         }
 
@@ -49,7 +49,7 @@ final class Buscar implements CommandInterface
 
     private function parseCriteria(string $input): array
     {
-        preg_match_all('/(nome|cidade|estado|nascimento|mae|pai)=("[^"]+"|\S+)/ui', $input, $matches, PREG_SET_ORDER);
+        preg_match_all('/(nome|cidade|estado|nascimento|mae|pai)=(\"[^\"]+\"|\\S+)/ui', $input, $matches, PREG_SET_ORDER);
         $criteria = [];
         foreach ($matches as $match) {
             $key = match (mb_strtolower($match[1])) {
@@ -58,7 +58,7 @@ final class Buscar implements CommandInterface
                 'pai' => 'father_name',
                 default => mb_strtolower($match[1]),
             };
-            $criteria[$key] = trim($match[2], '"');
+            $criteria[$key] = trim($match[2], '\\"');
         }
         return $criteria;
     }
