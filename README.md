@@ -65,7 +65,7 @@ Se `php` ou `composer` não forem reconhecidos, instale PHP e Composer seguindo 
 
 ## Primeiro teste da busca por nome
 
-A busca exige registros no banco local. Nesta fase, a entrada administrativa ainda será criada; portanto, os registros de teste devem ser inseridos somente no banco local por procedimento controlado.
+A busca exige registros no banco local. Para o primeiro teste, adicione um registro autorizado pelo terminal; o script grava somente no SQLite local e nunca no GitHub.\n\n```bash\nphp bin/add-person.php\n```\n\nDepois, execute o bot e faça a consulta no Telegram.
 
 Exemplo de consulta no Telegram:
 
@@ -90,7 +90,7 @@ Consulte [SECURITY-AUDIT.md](docs/SECURITY-AUDIT.md).
 ## Estrutura
 
 ```
-bin/                  scripts de configuração e inicialização
+bin/                  scripts de configuração, inicialização e entrada local
 src/api/              clientes de APIs externas
 src/controller/       orquestração do bot e logs
 src/db/               conexão e schema SQLite
