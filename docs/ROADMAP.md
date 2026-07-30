@@ -18,6 +18,7 @@
 - [x] Criar script local para inserir um registro autorizado, sem publicá-lo.
 - [ ] Executar uma busca real por nome, data de nascimento, filiação, cidade e profissão.
 - [x] Corrigir erro de sintaxe encontrado no script de cadastro e no comando de busca.
+- [x] Tornar os dados auxiliares opcionais no cadastro; somente o nome é obrigatório.
 - [ ] Registrar resultados sem expor dados.
 - [ ] Criar testes automatizados para homônimos, normalização e entradas inválidas.
 
