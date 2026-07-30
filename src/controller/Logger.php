@@ -10,10 +10,13 @@ final class Logger
     private const MESSAGE_ERROR_USER = 'Tivemos um erro interno, o desenvolvedor foi constatado!';
     private const MESSAGE_ERROR_DEV = "<b>• Erro:</b> %s\n\n<b>• Path:</b> %s\n\n<b>• Line:</b> %s";
 
-    private int $chatIdLogs;
+    private ?int $chatIdLogs;
 
     public function __construct() {
-        $this->chatIdLogs = $_ENV["LOGS_CHAT_ID"] ?? 5678591197;
+        $chatId = trim((string) ($_ENV["LOGS_CHAT_ID"] ?? ''));
+        $this->chatIdLogs = $chatId === ''
+            ? null
+            : filter_var($chatId, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
 
     private function quitHtml(?string $message) {
@@ -53,6 +56,10 @@ final class Logger
         }
         
         $ctx->reply(self::MESSAGE_ERROR_USER);
+
+        if ($this->chatIdLogs === null) {
+            return;
+        }
 
         $ctx->sendMessage($this->prepareMessage($e), [
             "chat_id" => $this->chatIdLogs,

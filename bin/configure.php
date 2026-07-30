@@ -9,13 +9,12 @@ $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . "/../.env");
 
 $sql = file_get_contents(__DIR__ . "/../src/db/database.sql");
-$stmt = Db::get(0)->prepare($sql);
+$pdo = Db::get(0);
 
-if (!$stmt->execute()) {
+if ($pdo === null || $pdo->exec($sql) === false) {
 	die("Não foi possível configurar seu banco de dados." . PHP_EOL);
 }
 
-$pdo = Db::get(0);
 $columns = array_column($pdo->query('PRAGMA table_info(person_records)')->fetchAll(), 'name');
 $migrations = [
     'mother_birth_date' => 'ALTER TABLE person_records ADD COLUMN mother_birth_date TEXT',
