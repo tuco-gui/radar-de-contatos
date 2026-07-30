@@ -73,7 +73,7 @@ A busca exige um registro no banco local. Para o teste, execute:
 php bin/add-person.php
 \`\`\`
 
-O script perguntará pelo nome, data de nascimento, nome e data de nascimento da mãe, nome e data de nascimento do pai, cidade, estado, profissão, fonte e finalidade. Os dados ficam somente no SQLite local e nunca são enviados ao GitHub.
+O único campo obrigatório é o nome completo. Data de nascimento, nome e data de nascimento da mãe, nome e data de nascimento do pai, cidade, estado e profissão podem ser deixados em branco quando não estiverem disponíveis. Fonte e finalidade recebem valores padrão se você apenas pressionar Enter. Os dados ficam somente no SQLite local e nunca são enviados ao GitHub.
 
 Depois, execute o bot:
 
