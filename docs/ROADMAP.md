@@ -14,7 +14,7 @@
 - [ ] Confirmar PHP, Composer e PDO SQLite no macOS.
 - [ ] Documentar e validar instalação no Windows.
 - [ ] Configurar bot e banco em ambiente local.
-- [ ] Inserir um registro de teste autorizado, sem publicá-lo.
+- [x] Criar script local para inserir um registro autorizado, sem publicá-lo.
 - [ ] Executar uma busca real por nome, data de nascimento, filiação e cidade.
 - [ ] Corrigir erros de execução e registrar resultados sem expor dados.
 - [ ] Criar testes automatizados para homônimos, normalização e entradas inválidas.
