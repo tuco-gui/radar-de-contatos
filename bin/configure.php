@@ -9,9 +9,22 @@ $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . "/../.env");
 
 $sql = file_get_contents(__DIR__ . "/../src/db/database.sql");
-$stmt = Db::get(0)->prepare($sql);
+$pdo = Db::get(0);
 
-if (!$stmt->execute()) {
+if ($pdo === null || $pdo->exec($sql) === false) {
 	die("Não foi possível configurar seu banco de dados." . PHP_EOL);
 }
+
+$columns = array_column($pdo->query('PRAGMA table_info(person_records)')->fetchAll(), 'name');
+$migrations = [
+    'mother_birth_date' => 'ALTER TABLE person_records ADD COLUMN mother_birth_date TEXT',
+    'father_birth_date' => 'ALTER TABLE person_records ADD COLUMN father_birth_date TEXT',
+    'profession' => 'ALTER TABLE person_records ADD COLUMN profession TEXT',
+];
+foreach ($migrations as $column => $migration) {
+    if (!in_array($column, $columns, true)) {
+        $pdo->exec($migration);
+    }
+}
+
 die("Banco de dados configurado com sucesso." . PHP_EOL);

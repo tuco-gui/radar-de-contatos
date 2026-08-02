@@ -6,6 +6,7 @@
 /*.sqlite
 *.sqlite
 *.db
+README.local.md
 .DS_Store
 ._*
 .idea/
